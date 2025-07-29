@@ -1,6 +1,5 @@
 import React from 'react'
-import Weather from './weather'
-import WeatherAxios from './WeatherAxios'
+import Weather from './Weather'
 
 function App() {
   return (
