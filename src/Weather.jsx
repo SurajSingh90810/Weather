@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-
+import './Weather.css';
 function Weather() {
     const [weather, setWeather] = useState(null);
     const [city, setCity] = useState('Mumbai');
@@ -36,6 +36,10 @@ function Weather() {
         getWeather();
     };
 
+    const convertUnixTime = (unix) => {
+        return new Date(unix * 1000).toLocaleTimeString();
+    };
+
     return (
         <div className="weather-app">
             <h1>Simple Weather App</h1>
@@ -64,8 +68,16 @@ function Weather() {
                     </div>
                     <p>{weather.weather[0].description}</p>
                     <div className="weather-details">
-                        <p>Humidity: {weather.main.humidity}%</p>
-                        <p>Wind: {weather.wind.speed} m/s</p>
+                        <p><strong>Feels Like:</strong> {Math.round(weather.main.feels_like)}°C</p>
+                        <p><strong>Min Temp:</strong> {Math.round(weather.main.temp_min)}°C</p>
+                        <p><strong>Max Temp:</strong> {Math.round(weather.main.temp_max)}°C</p>
+                        <p><strong>Humidity:</strong> {weather.main.humidity}%</p>
+                        <p><strong>Pressure:</strong> {weather.main.pressure} hPa</p>
+                        <p><strong>Wind:</strong> {weather.wind.speed} m/s</p>
+                        <p><strong>Visibility:</strong> {weather.visibility / 1000} km</p>
+                        <p><strong>Cloudiness:</strong> {weather.clouds.all}%</p>
+                        <p><strong>Sunrise:</strong> {convertUnixTime(weather.sys.sunrise)}</p>
+                        <p><strong>Sunset:</strong> {convertUnixTime(weather.sys.sunset)}</p>
                     </div>
                 </div>
             )}
